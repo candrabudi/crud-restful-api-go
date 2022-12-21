@@ -61,6 +61,7 @@ func ExtractTokenID(r *http.Request) (uint32, error) {
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
 			return nil, fmt.Errorf("Unexpected signing method: %?v", token.Header["alg"])
 		}
+		return []byte(os.Getenv("API_SECRET")), nil
 	})
 
 	if err != nil {
